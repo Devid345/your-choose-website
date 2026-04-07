@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Choose - Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #ee5a24;
+            --accent: #ffd93d;
+            --dark: #0a0a0f;
+            --darker: #050508;
+            --light: #ffffff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--darker);
+            font-family: 'Poppins', sans-serif;
+            color: var(--light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(238, 90, 36, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(255, 217, 61, 0.05) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(1); }
+            50% { opacity: var(--opacity); transform: scale(1.2); }
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 5;
+            filter: blur(1px);
+            animation: particle-float 15s linear infinite;
+        }
+
+        @keyframes particle-float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .hero-section {
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .badge-container {
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(238, 90, 36, 0.15));
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: var(--primary);
+        }
+
+        .badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        .logo-section {
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease 0.1s backwards;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 15px;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--light) 0%, var(--accent) 50%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .tagline span {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            margin: 40px auto;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .description {
+            max-width: 600px;
+            margin: 0 auto 50px;
+            animation: fadeInUp 1s ease 0.3s backwards;
+        }
+
+        .description p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .countdown-section {
+            margin-bottom: 50px;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 25px;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px 30px;
+            min-width: 120px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 107, 107, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .countdown-item span {
+            display: block;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .countdown-item label {
+            display: block;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 8px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            animation: fadeInUp 1s ease 0.5s backwards;
+        }
+
+        .feature-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 107, 107, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-card h3 {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .feature-card p {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .notify-section {
+            max-width: 500px;
+            margin: 0 auto 50px;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .notify-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 15px;
+        }
+
+        .notify-form {
+            display: flex;
+            gap: 12px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            padding: 8px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .notify-form:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.2);
+        }
+
+        .notify-form input {
+            flex: 1;
+            padding: 16px 24px;
+            border: none;
+            background: transparent;
+            color: var(--light);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .notify-form input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .notify-form button {
+            padding: 16px 35px;
+            border: none;
+            border-radius: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .notify-form button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            border-radius: 16px;
+            margin-top: 15px;
+            color: #4ade80;
+        }
+
+        .social-section {
+            animation: fadeInUp 1s ease 0.7s backwards;
+        }
+
+        .social-label {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .social-links a {
+            width: 55px;
+            height: 55px;
+            border-radius: 16px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.3);
+            z-index: 100;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .preview-section {
+            margin-top: 60px;
+            animation: fadeInUp 1s ease 0.8s backwards;
+        }
+
+        .preview-label {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 25px;
+        }
+
+        .preview-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .preview-card {
+            width: 180px;
+            height: 260px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .preview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7) 100%);
+            z-index: 1;
+        }
+
+        .preview-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+
+        .preview-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .preview-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .preview-card .card-content {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            z-index: 2;
+        }
+
+        .preview-card .card-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--light);
+        }
+
+        .preview-card .card-price {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .preview-card .card-tag {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            z-index: 2;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 3rem;
+            }
+
+            .countdown {
+                gap: 12px;
+            }
+
+            .countdown-item {
+                padding: 20px 20px;
+                min-width: 90px;
+            }
+
+            .countdown-item span {
+                font-size: 2.5rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                max-width: 300px;
+            }
+
+            .notify-form {
+                flex-direction: column;
+                border-radius: 20px;
+                padding: 15px;
+            }
+
+            .notify-form button {
+                width: 100%;
+            }
+
+            .preview-cards {
+                gap: 15px;
+            }
+
+            .preview-card {
+                width: 140px;
+                height: 190px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <div class="hero-section">
+            <div class="badge-container">
+                <div class="badge">
+                    <span>Launching Soon</span>
+                </div>
+            </div>
+
+            <div class="logo-section">
+                <div class="logo-icon">👗</div>
+                <h1 class="logo"><span>Your Choose</span></h1>
+                <p class="tagline">Fashion Redefined <span>|</span> Style Your Story</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="description">
+                <p>We're crafting something extraordinary for your wardrobe. Premium quality, timeless designs, and styles that speak to your unique personality. Stay tuned to be the first to experience fashion that feels like you.</p>
+            </div>
+
+            <div class="countdown-section">
+                <p class="countdown-label">Launch Countdown</p>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <span id="days">30</span>
+                        <label>Days</label>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="hours">00</span>
+                        <label>Hours</label>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="minutes">00</span>
+                        <label>Minutes</label>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="seconds">00</span>
+                        <label>Seconds</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>Premium Quality</h3>
+                    <p>Handpicked fabrics</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Unique Designs</h3>
+                    <p>Trending styles</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Fast Delivery</h3>
+                    <p>Free shipping</p>
+                </div>
+            </div>
+
+            <div class="notify-section">
+                <p class="notify-label">Get notified when we go live</p>
+                <form class="notify-form" id="notifyForm">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit">Notify Me</button>
+                </form>
+                <div class="success-message" id="successMessage">
+                    Thank you! You'll be the first to know when we launch.
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <p class="preview-label">Sneak Peek</p>
+                <div class="preview-cards">
+                    <div class="preview-card">
+                        <img src="https://images.unsplash.com/photo-1558171813-4c088753af8f?w=400&h=500&fit=crop" alt="Summer Collection">
+                        <span class="card-tag">New</span>
+                        <div class="card-content">
+                            <p class="card-title">Summer Collection</p>
+                            <p class="card-price">Coming Soon</p>
+                        </div>
+                    </div>
+                    <div class="preview-card">
+                        <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=400&h=500&fit=crop" alt="Street Style">
+                        <span class="card-tag">Trending</span>
+                        <div class="card-content">
+                            <p class="card-title">Street Style</p>
+                            <p class="card-price">Coming Soon</p>
+                        </div>
+                    </div>
+                    <div class="preview-card">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=500&fit=crop" alt="Premium Wear">
+                        <span class="card-tag">Premium</span>
+                        <div class="card-content">
+                            <p class="card-title">Premium Wear</p>
+                            <p class="card-price">Coming Soon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social-section" style="margin-top: 60px;">
+                <p class="social-label">Follow Us</p>
+                <div class="social-links">
+                    <a href="#" title="Instagram">📷</a>
+                    <a href="#" title="Facebook">f</a>
+                    <a href="#" title="Twitter">𝕏</a>
+                    <a href="#" title="TikTok">♪</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 Your Choose. All rights reserved.
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 100;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+                star.style.setProperty('--opacity', Math.random() * 0.8 + 0.2);
+                star.style.animationDelay = Math.random() * 5 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        function createParticles() {
+            const particleCount = 20;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                document.body.appendChild(particle);
+            }
+        }
+
+        function updateCountdown() {
+            const launchDate = new Date();
+            launchDate.setDate(launchDate.getDate() + 30);
+            launchDate.setHours(0, 0, 0, 0);
+
+            const now = new Date();
+            const diff = launchDate - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        createStars();
+        createParticles();
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        document.getElementById('notifyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
